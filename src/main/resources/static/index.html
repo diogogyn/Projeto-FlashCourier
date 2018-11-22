@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+   <meta charset="UTF-8">
+   <title>Projeto Java API</title>
+
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+         integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="js/libs/angular.min.js"></script>
+    <script src="js/libs/angular-resource.min.js"></script>
+    <script src="js/libs/angular-route.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/indexCtrl.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="indexCtrl">
+   <h1>Projeto java</h1>
+
+   <div class="alert alert-danger" id="notLoggedIn">Not logged in!</div>
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="panel panel-default" id="login">
+            <div class="panel-heading">
+               <h3 class="panel-title">Login</h3>
+            </div>
+            <div class="panel-body">
+               <form id="loginForm">
+                  <div class="form-group">
+                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="username"
+                            required name="username">
+                  </div>
+                  <div class="form-group">
+                     <input type="password" class="form-control" id="exampleInputPassword1"
+                            placeholder="password" required name="password">
+                  </div>
+                  <div class="well">
+                     Try one of the following logins
+                     <ul>
+                        <li>admin & admin</li>
+                        <li>user & password</li>
+                        <li>disabled & password</li>
+                     </ul>
+                  </div>
+                  <button type="submit" class="btn btn-default">login</button>
+               </form>
+            </div>
+         </div>
+
+         <div id="userInfo">
+            <div class="panel panel-default">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Authenticated user</h3>
+               </div>
+               <div class="panel-body">
+                  <div id="userInfoBody"></div>
+                  <button type="button" class="btn btn-default" id="logoutButton">logout</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+       <div class="col-lg-6">
+           <div id="loggedIn" class="panel panel-default panels-index">
+               <div class="panel-heading">
+                   Pesquisa de rastreios
+               </div>
+               <!-- /.panel-heading -->
+               <div class="panel-body">
+                   <div id="rastreioForm">
+                       <form id="sendRastreio">
+                           <fieldset>
+                               <div class="form-group">
+                                   <label for="id">Informe o numero da encomenda</label>
+                                   <input class="form-control" placeholder="..." id="id"
+                                          name="id" type="text" autofocus>
+                               </div>
+                               <!-- Change this to a button or input when using this as a form -->
+                               <input type="submit" class="btn btn-lg btn-success btn-block"
+                                      value="enviar">
+                           </fieldset>
+                       </form>
+                   </div>
+               </div>
+               <!-- /.panel-body -->
+           </div>
+           <!-- /.panel -->
+       </div>
+
+   </div>
+    <div class="row">
+         <div class="col-lg-6">
+            <div class="panel panel-default panels-index" id="rastreios">
+                <div class="panel-heading">
+                    Rastreamentos encontrados
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase">id</th>
+                            <th class="text-uppercase">cód Rastreio</th>
+                            <th class="text-uppercase">nome do produto</th>
+                            <th class="text-uppercase">detalhes</th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="c in rastreiosLista">
+                            <td>{{c.id}}</td>
+                            <td>{{c.codRastreio}}</td>
+                            <td class="text-uppercase">{{c.nomeProduto}}</td>
+                            <td class="text-uppercase"><a href="" ng-click="showRastreioDetail(c)"> detalhes</a> </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default panels-index" id="rastreioDetail">
+                <div class="panel-heading">
+                    Detalhes do Rastreio
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase">horario</th>
+                            <th class="text-uppercase">Status</th>
+                            <th class="text-uppercase">Localização</th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="r in rastreioStatus">
+                            <td>{{c.horario}}</td>
+                            <td>{{c.descricao}}</td>
+                            <td>{{c.localizacao}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+    </div>
+  </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="loginErrorModal">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Login unsuccessful</h4>
+         </div>
+         <div class="modal-body"></div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="
+        crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script src="js/libs/jwt-decode.min.js"></script>
+
+<!--<script src="js/client.js"></script>-->
+</body>
+</html>

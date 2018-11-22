@@ -1,0 +1,33 @@
+# config context path to "/" by setting an empty string
+server:
+  contextPath:
+
+# JACKSON
+spring:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+  jpa:
+      hibernate:
+        # possible values: validate | update | create | create-drop
+        ddl-auto: create-drop
+      datasource:
+        url: jdbc:mysql://localhost:3306/dados
+        username: root
+        password: Mysql@usp2018
+        driver-class-name: com.mysql.jdbc.Driver
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+      insertCertificate: insertCertificate
+
+#logging:
+#  level:
+#    org.springframework:
+#      security: DEBUG

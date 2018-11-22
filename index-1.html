@@ -1,0 +1,67 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Desconhecido </title></head><body>
+<p>Projeto desenvolvido a partir de um outro projeto publicado no github e adaptado para fazer CRUD de certificados digitais em uma prova de processo seletivo na Soluti. </p>
+<p>linnk original abaixo:</p>
+<h1 id="jwt-spring-security-demo">JWT Spring Security Demo</h1>
+<p><img alt="Screenshot from running application" src="etc/screenshot-jwt-spring-security-demo.png?raw=true" title="Screenshot JWT Spring Security Demo" /></p>
+<h2 id="about">About</h2>
+<p>This is just a simple demo for using <strong>JWT (JSON Web Token)</strong> with <strong>Spring Security</strong> and
+<strong>Spring Boot</strong>. This solution is partially based on the blog entry
+<a href="https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java">REST Security with JWT using Java and Spring Security</a>
+and the demo project <a href="https://github.com/brahalla/Cerberus">Cerberus</a>. Thanks to the authors!</p>
+<p><a href="https://travis-ci.org/szerhusenBC/jwt-spring-security-demo"><img alt="Build Status" src="https://travis-ci.org/szerhusenBC/jwt-spring-security-demo.svg?branch=master" /></a></p>
+<h2 id="requirements">Requirements</h2>
+<p>This demo is build with with Maven 3 and Java 1.8.</p>
+<h2 id="usage">Usage</h2>
+<p>Just start the application with the Spring Boot maven plugin (<code>mvn spring-boot:run</code>). The application is
+running at <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+<p>There are three user accounts present to demonstrate the different levels of access to the endpoints in
+the API and the different authorization exceptions:
+<code>Admin - admin:admin
+User - user:password
+Disabled - disabled:password (this user is disabled)</code></p>
+<p>There are three endpoints that are reasonable for the demo:
+<code>/auth - authentication endpoint with unrestricted access
+/persons - an example endpoint that is restricted to authorized users (a valid JWT token must be present in the request header)
+/protected - an example endpoint that is restricted to authorized users with the role 'ROLE_ADMIN' (a valid JWT token must be present in the request header)</code></p>
+<p>I've written a small Javascript client and put some comments in the code that hopefully makes this demo
+understandable.</p>
+<h3 id="generating-password-hash-for-new-users">Generating password hash for new users</h3>
+<p>I'm using <a href="https://en.wikipedia.org/wiki/Bcrypt">bcrypt</a> to encode passwords. Your can generate your hashes with this simple tool: <a href="https://www.bcrypt-generator.com">Bcrypt Generator</a></p>
+<h3 id="using-another-database">Using another database</h3>
+<p>Actually this demo is using an embedded H2 database that is automatically configured by Spring Boot. If you want to connect to another database you have to specify the connection in the <em>application.yml</em> in the resource directory. Here is an example for a MySQL DB:</p>
+<p><code>spring:
+  jpa:
+    hibernate:
+      # possible values: validate | update | create | create-drop
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:mysql://localhost/myDatabase
+    username: myUser
+    password: myPassword
+    driver-class-name: com.mysql.jdbc.Driver</code></p>
+<p><em>Hint: For other databases like MySQL sequences don't work for ID generation. So you have to change the GenerationType in the entity beans to 'AUTO' or 'IDENTITY'.</em></p>
+<p>You can find a reference of all application properties <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html">here</a>.</p>
+<h2 id="docker">Docker</h2>
+<p>This project has a docker image. You can find it at <a href="https://hub.docker.com/r/hubae/jwt-spring-security-demo/">https://hub.docker.com/r/hubae/jwt-spring-security-demo/</a>.</p>
+<h2 id="questions">Questions</h2>
+<p>If you have project related questions please take a look at the <a href="https://github.com/szerhusenBC/jwt-spring-security-demo/issues?utf8=%E2%9C%93&amp;q=is%3Aissue%20is%3Aopen%2Cclosed%20label%3Aquestion%20">past questions</a> or create a new ticket with your question.</p>
+<p><em>If you have questions that are not directly related to this project (e.g. common questions to the Spring Framework or Spring Security etc.) please search the web or look at <a href="http://www.stackoverflow.com">Stackoverflow</a>.</em></p>
+<p>Sorry for that but I'm very busy right now and don't have much time.</p>
+<h2 id="interesting-projects">Interesting projects</h2>
+<ul>
+<li><a href="https://github.com/pac4j/spring-security-pac4j">spring-security-pac4j</a> a Spring Boot integration for Pac4j (a Java security engine that coveres JWT beside others)</li>
+</ul>
+<h2 id="external-resources">External resources</h2>
+<p>Dan Vega (https://twitter.com/therealdanvega) created a video that explained this project quite fine. Thanks to him!</p>
+<p>https://youtu.be/mD3vmgksvz8</p>
+<h2 id="creator">Creator</h2>
+<p><strong>Stephan Zerhusen</strong></p>
+<ul>
+<li><a href="https://twitter.com/stzerhus">https://twitter.com/stzerhus</a></li>
+<li><a href="https://github.com/szerhusenBC">https://github.com/szerhusenBC</a></li>
+</ul>
+<h2 id="copyright-and-license">Copyright and license</h2>
+<p>The code is released under the <a href="LICENSE?raw=true">MIT license</a>.</p>
+<hr />
+<p>Please feel free to send me some feedback or questions!</p>
+</body></html>
